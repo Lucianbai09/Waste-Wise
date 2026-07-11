@@ -254,7 +254,7 @@ async function classify() {
     } finally {
         sorting = false;
         cancelSortBtn.hidden = true;
-        sortPanel.classList.remove("Sorting");
+        sortPanel.classList.remove("sorting");
     }
 }
 

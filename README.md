@@ -1,9 +1,10 @@
-# Trash Detector Sorter
+# Waste Wise
 
-Camera-based waste-sorting assistant. Take or upload a photo of an item and the app
-tells you which bin it goes in — Garbage, Blue Bin Recycling, Green Bin Compost, or
-Hazardous/Depot — based on City of Toronto rules, with prep instructions and warnings
-where needed. Powered by Flask and the Google Gemini API.
+Camera-based waste-sorting assistant — turning confusion into confidence. Take or
+upload a photo of an item and the app tells you which bin it goes in — Garbage, Blue
+Bin Recycling, Green Bin Compost, or Hazardous/Depot — based on City of Toronto
+rules, with prep instructions and warnings where needed. Powered by Flask and the
+Google Gemini API.
 
 ## Setup
 
@@ -26,5 +27,5 @@ where needed. Powered by Flask and the Google Gemini API.
    python app.py
    ```
 
-4. Open http://127.0.0.1:5000 — take a photo, or drag & drop / upload one, and hit
-   **Sort it**.
+4. Open http://127.0.0.1:5000, hit **Get Started**, then take a photo or drag &
+   drop / upload one — it sorts automatically.
