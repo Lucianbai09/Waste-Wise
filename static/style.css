@@ -1,0 +1,279 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: #f4f7f4;
+    color: #1f2d1f;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+.container {
+    width: 100%;
+    max-width: 640px;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 0.25rem;
+}
+
+.subtitle {
+    color: #5a6b5a;
+    margin-bottom: 1.5rem;
+}
+
+.photo-buttons {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.photo-buttons button,
+.camera-controls button {
+    flex: 1;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1f2d1f;
+    background: #fff;
+    border: 2px solid #9db89d;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.photo-buttons button:hover,
+.camera-controls button:hover {
+    border-color: #3e7c3e;
+    background: #eef5ee;
+}
+
+.camera-view {
+    margin-bottom: 0.75rem;
+}
+
+.camera-view video {
+    width: 100%;
+    border-radius: 12px;
+    background: #000;
+}
+
+.camera-controls {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+#capture-btn {
+    color: #fff;
+    background: #3e7c3e;
+    border-color: #3e7c3e;
+}
+
+#capture-btn:hover {
+    background: #2f612f;
+}
+
+.drop-zone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 220px;
+    border: 2px dashed #9db89d;
+    border-radius: 12px;
+    background: #fff;
+    cursor: pointer;
+    padding: 1rem;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.drop-zone:hover,
+.drop-zone.dragover {
+    border-color: #3e7c3e;
+    background: #eef5ee;
+}
+
+.drop-zone img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 8px;
+}
+
+#drop-zone-text {
+    color: #5a6b5a;
+}
+
+#classify-btn {
+    margin-top: 1rem;
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background: #3e7c3e;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#classify-btn:hover:not(:disabled) {
+    background: #2f612f;
+}
+
+#classify-btn:disabled {
+    background: #a8bda8;
+    cursor: not-allowed;
+}
+
+#results {
+    margin-top: 1.5rem;
+    text-align: left;
+}
+
+.overall-summary {
+    text-align: center;
+    color: #5a6b5a;
+    margin-bottom: 0.75rem;
+}
+
+.item-card {
+    background: #fff;
+    border-radius: 12px;
+    border-left: 6px solid #6b7280;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+}
+
+.item-header h3 {
+    text-transform: capitalize;
+}
+
+.bin-badge {
+    padding: 0.25rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fff;
+    background: #6b7280;
+    white-space: nowrap;
+}
+
+.item-card.garbage   { border-left-color: #4b5563; }
+.item-card.recycling { border-left-color: #2563eb; }
+.item-card.compost   { border-left-color: #16a34a; }
+.item-card.hazardous { border-left-color: #ea580c; }
+
+.item-card.garbage   .bin-badge { background: #4b5563; }
+.item-card.recycling .bin-badge { background: #2563eb; }
+.item-card.compost   .bin-badge { background: #16a34a; }
+.item-card.hazardous .bin-badge { background: #ea580c; }
+
+.explanation {
+    color: #374151;
+    line-height: 1.5;
+}
+
+.prep-note {
+    margin-top: 0.6rem;
+    padding: 0.5rem 0.75rem;
+    background: #fef3c7;
+    border-radius: 8px;
+    color: #78350f;
+    font-weight: 500;
+}
+
+.warning-box {
+    margin-top: 0.6rem;
+    padding: 0.6rem 0.75rem;
+    background: #fee2e2;
+    border: 1px solid #dc2626;
+    border-radius: 8px;
+    color: #991b1b;
+    font-weight: 600;
+}
+
+.error {
+    margin-top: 1rem;
+    color: #dc2626;
+}
+
+/* ---- screen sizes (same breakpoint structure as the portfolio) ---- */
+
+/* large laptops / desktops: give the results a bit more room */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 720px;
+    }
+}
+
+/* tablets & narrow windows */
+@media (max-width: 768px) {
+    body {
+        padding: 1.25rem 0.75rem;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    .drop-zone {
+        min-height: 180px;
+    }
+}
+
+/* split-screen laptop band (the portfolio problem zone) — custom tweaks go here */
+@media (min-width: 481px) and (max-width: 768px) {
+    .photo-buttons button {
+        font-size: 0.95rem;
+        padding: 0.6rem;
+    }
+}
+
+/* phones */
+@media (max-width: 480px) {
+    body {
+        padding: 1rem 0.5rem;
+    }
+
+    h1 {
+        font-size: 1.4rem;
+    }
+
+    .subtitle {
+        font-size: 0.95rem;
+    }
+
+    .photo-buttons {
+        flex-direction: column;
+    }
+
+    .drop-zone {
+        min-height: 150px;
+    }
+
+    .item-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.35rem;
+    }
+}
