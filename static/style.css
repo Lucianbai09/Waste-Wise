@@ -123,6 +123,16 @@ body {
     }
 }
 
+/* Title Case for all button/label text, including JS-set hint states */
+.hero-btn,
+.pill-btn,
+.cancel-sort-btn,
+.camera-controls button,
+.panel-hint,
+.drop-zone {
+    text-transform: capitalize;
+}
+
 /* ---------------- Sort page (matches sortpageOG.png / sortpage.png) ---------------- */
 
 .sort-page {
@@ -295,6 +305,30 @@ body {
     font-family: "Poppins", system-ui, sans-serif;
     font-size: clamp(1rem, 2.1vw, 2.5rem);
     color: #3e7c3e;
+}
+
+/* while sorting, the hint gives up its bottom auto-margin so the
+   cancel button sits right under it, both centered as a pair */
+.sort-right.sorting .panel-hint {
+    margin-bottom: 0;
+}
+
+.cancel-sort-btn {
+    margin: 1.2rem auto auto;
+    font-family: "Poppins", system-ui, sans-serif;
+    font-weight: 500;
+    font-size: clamp(0.95rem, 1.3vw, 1.5rem);
+    color: #3e7c3e;
+    background: transparent;
+    border: 3px solid #3e7c3e;
+    border-radius: 999px;
+    padding: 0.4em 1.8em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.cancel-sort-btn:hover {
+    background: #badcae;
 }
 
 .overall-summary {

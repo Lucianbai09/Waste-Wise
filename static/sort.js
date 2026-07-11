@@ -14,6 +14,8 @@ const dropZoneText = document.getElementById("drop-zone-text");
 const preview = document.getElementById("preview");
 const errorEl = document.getElementById("error");
 const panelHint = document.getElementById("panel-hint");
+const cancelSortBtn = document.getElementById("cancel-sort-btn");
+const sortPanel = document.querySelector(".sort-right");
 const summaryEl = document.getElementById("overall-summary");
 const resultsList = document.getElementById("results-list");
 
@@ -214,30 +216,48 @@ dropZone.addEventListener("drop", (e) => {
 });
 
 let sorting = false;
+let controller = null;
 
 async function classify() {
     if (sorting || !processedBlob) return;
     sorting = true;
+    controller = new AbortController();
     hideError();
     resultsList.hidden = true;
     summaryEl.hidden = true;
     panelHint.hidden = false;
     panelHint.innerHTML = '<span class="spinner"></span>sorting&hellip;';
+    cancelSortBtn.hidden = false;
+    sortPanel.classList.add("sorting");
 
     try {
         const formData = new FormData();
         formData.append("photo", processedBlob, "photo.jpg");
 
-        const res = await fetch("/classify", { method: "POST", body: formData });
+        const res = await fetch("/classify", {
+            method: "POST",
+            body: formData,
+            signal: controller.signal,
+        });
         const data = await res.json();
 
         if (!res.ok) throw new Error(data.error || "Something went wrong.");
         panelHint.hidden = true;
         renderResults(data);
     } catch (err) {
-        panelHint.hidden = true;
-        showError(err.message || "Something went wrong.");
+        if (err.name === "AbortError") {
+            panelHint.textContent = "Sorting cancelled — pick a photo to try again.";
+        } else {
+            panelHint.hidden = true;
+            showError(err.message || "Something went wrong.");
+        }
     } finally {
         sorting = false;
+        cancelSortBtn.hidden = true;
+        sortPanel.classList.remove("Sorting");
     }
 }
+
+cancelSortBtn.addEventListener("click", () => {
+    if (controller) controller.abort();
+});

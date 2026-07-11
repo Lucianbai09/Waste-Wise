@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Waste Wise — sort an item</title>
-    <link rel="icon" type="image/webp" href="{{ url_for('static', filename='img/earth.webp') }}">
-    <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/earth.webp') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/favicon.png') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
@@ -44,6 +44,7 @@
 
             <section class="sort-right">
                 <p id="panel-hint" class="panel-hint">Take / upload a photo</p>
+                <button type="button" id="cancel-sort-btn" class="cancel-sort-btn" hidden>cancel</button>
                 <p id="overall-summary" class="overall-summary" hidden></p>
                 <div id="results-list" hidden></div>
                 <p id="error" class="error" hidden></p>
