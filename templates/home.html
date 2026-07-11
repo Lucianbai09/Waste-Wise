@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waste Wise</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#x267B;&#xFE0F;</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600&family=Poppins:ital,wght@1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="home">
+    <main class="hero">
+        <div class="hero-text">
+            <h1>WASTE<br>WISE</h1>
+            <p class="tagline">Turning <strong>confusion</strong><br>into <strong>confidence</strong>.</p>
+            <a class="hero-btn" href="/sort">get started</a>
+        </div>
+
+        <div class="earth-scene" aria-hidden="true">
+            <img class="earth" src="{{ url_for('static', filename='img/earth.webp') }}" alt="">
+            <img class="orbit-item" style="--a: 267; --r: 0.44; --s: 15%; --tilt: 60deg" src="{{ url_for('static', filename='img/bottle.webp') }}" alt="">
+            <img class="orbit-item" style="--a: 221; --r: 0.45; --s: 16%" src="{{ url_for('static', filename='img/battery.webp') }}" alt="">
+            <img class="orbit-item" style="--a: 315; --r: 0.41; --s: 20%" src="{{ url_for('static', filename='img/can.webp') }}" alt="">
+            <img class="orbit-item" style="--a: 177; --r: 0.45; --s: 14%" src="{{ url_for('static', filename='img/glove.webp') }}" alt="">
+            <img class="orbit-item" style="--a: 4;   --r: 0.44; --s: 22%" src="{{ url_for('static', filename='img/alcohol.webp') }}" alt="">
+            <img class="orbit-item" style="--a: 142; --r: 0.43; --s: 13%" src="{{ url_for('static', filename='img/box.webp') }}" alt="">
+            <img class="orbit-item" style="--a: 40;  --r: 0.44; --s: 12%" src="{{ url_for('static', filename='img/banana.webp') }}" alt="">
+            <img class="orbit-item" style="--a: 90;  --r: 0.40; --s: 12%" src="{{ url_for('static', filename='img/paper.webp') }}" alt="">
+        </div>
+    </main>
+</body>
+</html>

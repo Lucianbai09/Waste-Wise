@@ -103,8 +103,13 @@ If the photo contains no identifiable waste item, return an empty items array.
 
 
 @app.route("/")
-def index():
-    return render_template("index.html")
+def home():
+    return render_template("home.html")
+
+
+@app.route("/sort")
+def sort_page():
+    return render_template("sort.html")
 
 
 @app.errorhandler(413)
