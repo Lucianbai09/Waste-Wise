@@ -154,7 +154,7 @@ body.home {
     display: flex;
     align-items: center;
     min-height: 100vh;
-    padding: 2rem 3vw 2rem 11vw;
+    padding: 6vh 3vw 6vh 11vw;
     gap: 2vw;
 }
 
@@ -170,7 +170,7 @@ body.home {
     line-height: 1;
     letter-spacing: -0.02em;
     color: #3e7c3e;
-    margin-bottom: 5vh;
+    margin-bottom: 3vh;
 }
 
 .tagline {
@@ -181,6 +181,7 @@ body.home {
     line-height: 1.4;
     color: #16301b;
     margin-bottom: 7vh;
+    margin-left: 6px;
 }
 
 .tagline strong {
@@ -198,6 +199,7 @@ body.home {
     text-decoration: none;
     padding: 0.6em 2.4em;
     border-radius: 0.5em;
+    margin-left: 6px;
     transition: background 0.2s;
 }
 
@@ -256,7 +258,7 @@ body.home {
     .hero {
         flex-direction: column;
         justify-content: center;
-        padding: 3rem 4vw;
+        padding: 4rem 4vw;
         gap: 2rem;
     }
 
@@ -266,16 +268,18 @@ body.home {
 
     .hero-text h1 {
         font-size: 26vw;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
     }
 
     .tagline {
         font-size: 5.5vw;
         margin-bottom: 1.5rem;
+        margin-left: 12px;
     }
 
     .hero-btn {
         font-size: 5vw;
+        margin-left: 12px;
     }
 
     .earth-scene {
