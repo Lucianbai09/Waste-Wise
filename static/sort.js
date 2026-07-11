@@ -1,7 +1,6 @@
 // downscale photos before upload — phone photos are 5-12 MB and would slow the demo
 const MAX_DIMENSION = 1280;
 
-const form = document.getElementById("upload-form");
 const cameraBtn = document.getElementById("camera-btn");
 const uploadBtn = document.getElementById("upload-btn");
 const cameraInput = document.getElementById("camera-input");
@@ -13,8 +12,8 @@ const cancelCameraBtn = document.getElementById("cancel-camera-btn");
 const dropZone = document.getElementById("drop-zone");
 const dropZoneText = document.getElementById("drop-zone-text");
 const preview = document.getElementById("preview");
-const classifyBtn = document.getElementById("classify-btn");
 const errorEl = document.getElementById("error");
+const panelHint = document.getElementById("panel-hint");
 const summaryEl = document.getElementById("overall-summary");
 const resultsList = document.getElementById("results-list");
 
@@ -34,6 +33,7 @@ function makeNote(className, text) {
 
 function renderResults(data) {
     resultsList.textContent = "";
+    resultsList.hidden = false;
     summaryEl.hidden = true;
     if (data.overall_summary && data.items.length > 1) {
         summaryEl.textContent = data.overall_summary;
@@ -111,13 +111,13 @@ function downscale(file) {
     });
 }
 
-function usePhoto(blob, label) {
+function usePhoto(blob) {
     processedBlob = blob;
     if (preview.src) URL.revokeObjectURL(preview.src);
     preview.src = URL.createObjectURL(blob);
     preview.hidden = false;
-    dropZoneText.textContent = label;
-    classifyBtn.disabled = false;
+    dropZoneText.hidden = true;
+    classify();
 }
 
 async function handleFile(file) {
@@ -130,7 +130,7 @@ async function handleFile(file) {
         showError(err.message);
         return;
     }
-    usePhoto(blob, file.name || "photo");
+    usePhoto(blob);
 }
 
 let mediaStream = null;
@@ -157,6 +157,7 @@ function stopCamera() {
     }
     cameraStream.srcObject = null;
     cameraView.hidden = true;
+    dropZone.hidden = false;
 }
 
 cameraBtn.addEventListener("click", async () => {
@@ -178,6 +179,7 @@ cameraBtn.addEventListener("click", async () => {
     }
     hideError();
     cameraStream.srcObject = mediaStream;
+    dropZone.hidden = true;
     cameraView.hidden = false;
 });
 
@@ -187,7 +189,7 @@ captureBtn.addEventListener("click", () => {
     if (!width) return; // stream not ready yet
     const blobPromise = toJpegBlob(cameraStream, width, height); // draws the frame before the stream stops
     stopCamera();
-    blobPromise.then((blob) => usePhoto(blob, "camera photo"), (err) => showError(err.message));
+    blobPromise.then(usePhoto, (err) => showError(err.message));
 });
 
 cancelCameraBtn.addEventListener("click", stopCamera);
@@ -211,13 +213,16 @@ dropZone.addEventListener("drop", (e) => {
     handleFile(e.dataTransfer.files[0]);
 });
 
-form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    if (!processedBlob) return;
+let sorting = false;
 
-    classifyBtn.disabled = true;
-    classifyBtn.innerHTML = '<span class="spinner"></span>Sorting...';
+async function classify() {
+    if (sorting || !processedBlob) return;
+    sorting = true;
     hideError();
+    resultsList.hidden = true;
+    summaryEl.hidden = true;
+    panelHint.hidden = false;
+    panelHint.innerHTML = '<span class="spinner"></span>sorting&hellip;';
 
     try {
         const formData = new FormData();
@@ -227,12 +232,12 @@ form.addEventListener("submit", async (e) => {
         const data = await res.json();
 
         if (!res.ok) throw new Error(data.error || "Something went wrong.");
+        panelHint.hidden = true;
         renderResults(data);
-        resultsList.scrollIntoView({ behavior: "smooth", block: "nearest" });
     } catch (err) {
+        panelHint.hidden = true;
         showError(err.message || "Something went wrong.");
     } finally {
-        classifyBtn.disabled = false;
-        classifyBtn.textContent = "Sort it";
+        sorting = false;
     }
-});
+}

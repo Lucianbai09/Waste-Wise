@@ -4,144 +4,11 @@
     padding: 0;
 }
 
+/* grid-paper background shared by both pages (from the Canva design) */
 body {
     font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-    background: #f4f7f4;
     color: #1f2d1f;
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    padding: 2rem 1rem;
-}
-
-.container {
-    width: 100%;
-    max-width: 640px;
-    text-align: center;
-}
-
-h1 {
-    margin-bottom: 0.25rem;
-}
-
-.subtitle {
-    color: #5a6b5a;
-    margin-bottom: 1.5rem;
-}
-
-.photo-buttons {
-    display: flex;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
-}
-
-.photo-buttons button,
-.camera-controls button {
-    flex: 1;
-    padding: 0.75rem;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #1f2d1f;
-    background: #fff;
-    border: 2px solid #9db89d;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: border-color 0.2s, background 0.2s;
-}
-
-.photo-buttons button:hover,
-.camera-controls button:hover {
-    border-color: #3e7c3e;
-    background: #eef5ee;
-}
-
-.camera-view {
-    margin-bottom: 0.75rem;
-}
-
-.camera-view video {
-    width: 100%;
-    border-radius: 12px;
-    background: #000;
-}
-
-.camera-controls {
-    display: flex;
-    gap: 0.75rem;
-    margin-top: 0.5rem;
-}
-
-#capture-btn {
-    color: #fff;
-    background: #3e7c3e;
-    border-color: #3e7c3e;
-}
-
-#capture-btn:hover {
-    background: #2f612f;
-}
-
-.drop-zone {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    min-height: 220px;
-    border: 2px dashed #9db89d;
-    border-radius: 12px;
-    background: #fff;
-    cursor: pointer;
-    padding: 1rem;
-    transition: border-color 0.2s, background 0.2s;
-}
-
-.drop-zone:hover,
-.drop-zone.dragover {
-    border-color: #3e7c3e;
-    background: #eef5ee;
-}
-
-.drop-zone img {
-    max-width: 100%;
-    max-height: 300px;
-    border-radius: 8px;
-}
-
-#drop-zone-text {
-    color: #5a6b5a;
-}
-
-.primary-btn {
-    display: block;
-    margin-top: 1rem;
-    width: 100%;
-    padding: 0.75rem;
-    font-size: 1rem;
-    font-weight: 600;
-    text-align: center;
-    text-decoration: none;
-    color: #fff;
-    background: #3e7c3e;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.primary-btn:hover:not(:disabled) {
-    background: #2f612f;
-}
-
-.primary-btn:disabled {
-    background: #a8bda8;
-    cursor: not-allowed;
-}
-
-/* Home / landing page (matches homeOG.png Canva design) */
-body.home {
-    display: block;
-    padding: 0;
     overflow-x: clip;
     background-color: #faf6e4;
     background-image:
@@ -149,6 +16,8 @@ body.home {
         linear-gradient(90deg, #b9d0a6 1px, transparent 1px);
     background-size: 2.35vw 2.35vw;
 }
+
+/* ---------------- Home / landing page (matches homeOG.png) ---------------- */
 
 .hero {
     display: flex;
@@ -254,7 +123,293 @@ body.home {
     }
 }
 
+/* ---------------- Sort page (matches sortpageOG.png / sortpage.png) ---------------- */
+
+.sort-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 4vh 6vw 6vh;
+}
+
+.sort-page [hidden] {
+    display: none !important;
+}
+
+.logo {
+    font-family: "Archivo", system-ui, sans-serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 5.2vw, 6.5rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: #3e7c3e;
+    text-decoration: none;
+    align-self: flex-start;
+    margin-bottom: 3.5vh;
+}
+
+.sort-columns {
+    display: flex;
+    gap: 4vw;
+    flex: 1;
+    min-height: 0;
+}
+
+.sort-left {
+    width: 44%;
+    display: flex;
+    flex-direction: column;
+    gap: 2.4vh;
+    min-height: 0;
+}
+
+.pill-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6em;
+    font-family: "Poppins", system-ui, sans-serif;
+    font-weight: 500;
+    font-size: clamp(1rem, 2.1vw, 2.5rem);
+    color: #3e7c3e;
+    background: #cbe3c3;
+    border: 3px solid #3e7c3e;
+    border-radius: 18px;
+    padding: 0.55em 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.pill-btn:hover {
+    background: #badcae;
+}
+
+.pill-btn svg {
+    width: 1.25em;
+    height: 1.25em;
+    flex-shrink: 0;
+}
+
+.drop-zone {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    overflow: hidden;
+    text-align: center;
+    font-family: "Poppins", system-ui, sans-serif;
+    font-size: clamp(1rem, 2.1vw, 2.5rem);
+    color: #3e7c3e;
+    background: #cbe3c3;
+    border: 3px dashed #3e7c3e;
+    border-radius: 18px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.drop-zone:hover,
+.drop-zone.dragover {
+    background: #badcae;
+}
+
+.drop-zone img {
+    max-width: 100%;
+    max-height: 90%;
+    min-height: 0;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+.camera-view {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.camera-view video {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 18px;
+    border: 3px solid #3e7c3e;
+    background: #000;
+}
+
+.camera-controls {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.camera-controls button {
+    flex: 1;
+    font-family: "Poppins", system-ui, sans-serif;
+    font-weight: 500;
+    font-size: clamp(0.95rem, 1.3vw, 1.5rem);
+    color: #3e7c3e;
+    background: #cbe3c3;
+    border: 3px solid #3e7c3e;
+    border-radius: 14px;
+    padding: 0.5em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.camera-controls button:hover {
+    background: #badcae;
+}
+
+#capture-btn {
+    color: #fff;
+    background: #3e7c3e;
+}
+
+#capture-btn:hover {
+    background: #2f612f;
+}
+
+.sort-right {
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.75rem, 1.2vw, 1.5rem);
+    background: #cbe3c3;
+    border: 3px solid #3e7c3e;
+    border-radius: 18px;
+    padding: clamp(0.75rem, 1.2vw, 1.5rem);
+}
+
+.panel-hint {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    font-family: "Poppins", system-ui, sans-serif;
+    font-size: clamp(1rem, 2.1vw, 2.5rem);
+    color: #3e7c3e;
+}
+
+.overall-summary {
+    flex-shrink: 0;
+    text-align: center;
+    font-family: "Poppins", system-ui, sans-serif;
+    color: #2f612f;
+}
+
+#results-list {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.75rem, 1.2vw, 1.5rem);
+}
+
+.item-card {
+    --bin-color: #6b7280;
+    flex-shrink: 0;
+    min-height: 31%;
+    background: #fff;
+    border-radius: 18px;
+    border-left: clamp(14px, 1.6vw, 32px) solid var(--bin-color);
+    padding: clamp(0.75rem, 1.3vw, 1.5rem) clamp(1rem, 1.5vw, 1.75rem);
+}
+
+.item-card.garbage   { --bin-color: #111111; }
+.item-card.recycling { --bin-color: #6b8cf0; }
+.item-card.compost   { --bin-color: #10b528; }
+.item-card.hazardous { --bin-color: #ea580c; }
+
+.item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+}
+
+.item-header h3 {
+    text-transform: capitalize;
+    font-family: "Poppins", system-ui, sans-serif;
+    font-weight: 600;
+    font-size: clamp(1rem, 1.5vw, 1.8rem);
+}
+
+.bin-badge {
+    padding: 0.25rem 0.9rem;
+    border-radius: 999px;
+    font-size: clamp(0.8rem, 1vw, 1.2rem);
+    font-weight: 600;
+    color: #fff;
+    background: var(--bin-color);
+    white-space: nowrap;
+}
+
+.explanation {
+    color: #374151;
+    line-height: 1.5;
+    font-size: clamp(0.9rem, 1.1vw, 1.35rem);
+}
+
+.prep-note {
+    margin-top: 0.6rem;
+    padding: 0.5rem 0.75rem;
+    background: #fef3c7;
+    border-radius: 10px;
+    color: #78350f;
+    font-weight: 500;
+    font-size: clamp(0.9rem, 1.1vw, 1.35rem);
+}
+
+.warning-box {
+    margin-top: 0.6rem;
+    padding: 0.6rem 0.75rem;
+    background: #fee2e2;
+    border: 1px solid #dc2626;
+    border-radius: 10px;
+    color: #991b1b;
+    font-weight: 600;
+    font-size: clamp(0.9rem, 1.1vw, 1.35rem);
+}
+
+.error {
+    margin: auto;
+    color: #dc2626;
+    font-family: "Poppins", system-ui, sans-serif;
+    font-weight: 600;
+}
+
+.spinner {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    border: 2px solid rgba(62, 124, 62, 0.25);
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ---------------- small screens ---------------- */
+
 @media (max-width: 820px) {
+    body {
+        background-size: 6vw 6vw;
+    }
+
     .hero {
         flex-direction: column;
         justify-content: center;
@@ -286,189 +441,56 @@ body.home {
         --scene: min(92vw, 70vh);
     }
 
-    body.home {
-        background-size: 6vw 6vw;
-    }
-}
-
-.spinner {
-    display: inline-block;
-    width: 1em;
-    height: 1em;
-    margin-right: 0.5rem;
-    vertical-align: -0.15em;
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    border-top-color: #fff;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-#results {
-    margin-top: 1.5rem;
-    text-align: left;
-}
-
-.overall-summary {
-    text-align: center;
-    color: #5a6b5a;
-    margin-bottom: 0.75rem;
-}
-
-.item-card {
-    --bin-color: #6b7280;
-    background: #fff;
-    border-radius: 12px;
-    border-left: 6px solid var(--bin-color);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    padding: 1rem 1.25rem;
-    margin-bottom: 0.75rem;
-}
-
-.item-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    margin-bottom: 0.5rem;
-}
-
-.item-header h3 {
-    text-transform: capitalize;
-}
-
-.bin-badge {
-    padding: 0.25rem 0.9rem;
-    border-radius: 999px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #fff;
-    background: var(--bin-color);
-    white-space: nowrap;
-}
-
-.item-card.garbage   { --bin-color: #4b5563; }
-.item-card.recycling { --bin-color: #2563eb; }
-.item-card.compost   { --bin-color: #16a34a; }
-.item-card.hazardous { --bin-color: #ea580c; }
-
-.explanation {
-    color: #374151;
-    line-height: 1.5;
-}
-
-.prep-note {
-    margin-top: 0.6rem;
-    padding: 0.5rem 0.75rem;
-    background: #fef3c7;
-    border-radius: 8px;
-    color: #78350f;
-    font-weight: 500;
-}
-
-.warning-box {
-    margin-top: 0.6rem;
-    padding: 0.6rem 0.75rem;
-    background: #fee2e2;
-    border: 1px solid #dc2626;
-    border-radius: 8px;
-    color: #991b1b;
-    font-weight: 600;
-}
-
-.error {
-    margin-top: 1rem;
-    color: #dc2626;
-}
-
-/* Canva design mode: full-page export as the page background, with the real
-   interactive elements absolutely positioned over it in % so they scale */
-.design-page {
-    position: relative;
-    width: 100%;
-    max-width: 640px;
-    margin: 0 auto;
-}
-
-.design-page .design-bg {
-    display: block;
-    width: 100%;
-    height: auto;
-}
-
-.hotspot {
-    position: absolute;
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    font-size: 0;
-    color: transparent;
-}
-
-/* individually exported webp items (buttons, icons) */
-.img-btn {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-}
-
-.img-btn img {
-    display: block;
-    width: 100%;
-}
-
-@media (min-width: 1200px) {
-    .container {
-        max-width: 720px;
-    }
-}
-
-@media (max-width: 768px) {
-    body {
-        padding: 1.25rem 0.75rem;
+    .sort-page {
+        height: auto;
+        min-height: 100vh;
+        padding: 2.5rem 4vw 3rem;
     }
 
-    h1 {
-        font-size: 1.6rem;
+    .logo {
+        font-size: 11vw;
+        margin-bottom: 1.5rem;
     }
 
-    .drop-zone {
-        min-height: 180px;
-    }
-}
-
-@media (min-width: 481px) and (max-width: 768px) {
-    .photo-buttons button {
-        font-size: 0.95rem;
-        padding: 0.6rem;
-    }
-}
-
-@media (max-width: 480px) {
-    body {
-        padding: 1rem 0.5rem;
-    }
-
-    h1 {
-        font-size: 1.4rem;
-    }
-
-    .subtitle {
-        font-size: 0.95rem;
-    }
-
-    .photo-buttons {
+    .sort-columns {
         flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    .sort-left {
+        width: 100%;
+    }
+
+    .pill-btn {
+        font-size: 5vw;
     }
 
     .drop-zone {
-        min-height: 150px;
+        flex: none;
+        min-height: 30vh;
+        font-size: 4.5vw;
+    }
+
+    .drop-zone img {
+        max-height: 50vh;
+    }
+
+    .camera-view {
+        flex: none;
+        min-height: 40vh;
+    }
+
+    .sort-right {
+        min-height: 45vh;
+        max-height: 75vh;
+    }
+
+    .panel-hint {
+        font-size: 4.5vw;
+    }
+
+    .item-card {
+        min-height: 0;
     }
 
     .item-header {
