@@ -147,9 +147,10 @@ h1 {
 }
 
 .item-card {
+    --bin-color: #6b7280;
     background: #fff;
     border-radius: 12px;
-    border-left: 6px solid #6b7280;
+    border-left: 6px solid var(--bin-color);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     padding: 1rem 1.25rem;
     margin-bottom: 0.75rem;
@@ -174,19 +175,14 @@ h1 {
     font-size: 0.85rem;
     font-weight: 600;
     color: #fff;
-    background: #6b7280;
+    background: var(--bin-color);
     white-space: nowrap;
 }
 
-.item-card.garbage   { border-left-color: #4b5563; }
-.item-card.recycling { border-left-color: #2563eb; }
-.item-card.compost   { border-left-color: #16a34a; }
-.item-card.hazardous { border-left-color: #ea580c; }
-
-.item-card.garbage   .bin-badge { background: #4b5563; }
-.item-card.recycling .bin-badge { background: #2563eb; }
-.item-card.compost   .bin-badge { background: #16a34a; }
-.item-card.hazardous .bin-badge { background: #ea580c; }
+.item-card.garbage   { --bin-color: #4b5563; }
+.item-card.recycling { --bin-color: #2563eb; }
+.item-card.compost   { --bin-color: #16a34a; }
+.item-card.hazardous { --bin-color: #ea580c; }
 
 .explanation {
     color: #374151;
@@ -217,16 +213,12 @@ h1 {
     color: #dc2626;
 }
 
-/* ---- screen sizes (same breakpoint structure as the portfolio) ---- */
-
-/* large laptops / desktops: give the results a bit more room */
 @media (min-width: 1200px) {
     .container {
         max-width: 720px;
     }
 }
 
-/* tablets & narrow windows */
 @media (max-width: 768px) {
     body {
         padding: 1.25rem 0.75rem;
@@ -241,7 +233,6 @@ h1 {
     }
 }
 
-/* split-screen laptop band (the portfolio problem zone) — custom tweaks go here */
 @media (min-width: 481px) and (max-width: 768px) {
     .photo-buttons button {
         font-size: 0.95rem;
@@ -249,7 +240,6 @@ h1 {
     }
 }
 
-/* phones */
 @media (max-width: 480px) {
     body {
         padding: 1rem 0.5rem;

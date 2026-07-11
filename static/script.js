@@ -1,8 +1,8 @@
-const BIN_INFO = {
-    garbage:   { label: "Garbage" },
-    recycling: { label: "Blue Bin Recycling" },
-    compost:   { label: "Green Bin Compost" },
-    hazardous: { label: "Hazardous / Depot" },
+const BIN_LABELS = {
+    garbage: "Garbage",
+    recycling: "Blue Bin Recycling",
+    compost: "Green Bin Compost",
+    hazardous: "Hazardous / Depot",
 };
 
 // downscale photos before upload — phone photos are 5-12 MB and would slow the demo
@@ -37,26 +37,32 @@ function hideError() {
     errorEl.hidden = true;
 }
 
+function toJpegBlob(source, width, height) {
+    const scale = Math.min(1, MAX_DIMENSION / Math.max(width, height));
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.round(width * scale);
+    canvas.height = Math.round(height * scale);
+    canvas.getContext("2d").drawImage(source, 0, 0, canvas.width, canvas.height);
+    return new Promise((resolve, reject) =>
+        canvas.toBlob(
+            (blob) => (blob ? resolve(blob) : reject(new Error("Couldn't process the image."))),
+            "image/jpeg",
+            0.85
+        )
+    );
+}
+
 function downscale(file) {
     return new Promise((resolve, reject) => {
         const url = URL.createObjectURL(file);
         const img = new Image();
         img.onload = () => {
             URL.revokeObjectURL(url);
-            const scale = Math.min(1, MAX_DIMENSION / Math.max(img.width, img.height));
-            if (scale === 1 && file.type === "image/jpeg") {
+            if (Math.max(img.width, img.height) <= MAX_DIMENSION && file.type === "image/jpeg") {
                 resolve(file);
                 return;
             }
-            const canvas = document.createElement("canvas");
-            canvas.width = Math.round(img.width * scale);
-            canvas.height = Math.round(img.height * scale);
-            canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
-            canvas.toBlob(
-                (blob) => (blob ? resolve(blob) : reject(new Error("Couldn't process the image."))),
-                "image/jpeg",
-                0.85
-            );
+            toJpegBlob(img, img.width, img.height).then(resolve, reject);
         };
         img.onerror = () => {
             URL.revokeObjectURL(url);
@@ -116,10 +122,9 @@ function stopCamera() {
 }
 
 cameraBtn.addEventListener("click", async () => {
-    if (mediaStream) return; // camera already open
-    // Desktop browsers ignore capture="environment" and open a file picker instead,
-    // so use the webcam via getUserMedia; the capture input stays as the fallback
-    // where getUserMedia doesn't exist (it opens the native camera app on phones).
+    if (mediaStream) return;
+    // desktop browsers ignore capture="environment", so use getUserMedia there;
+    // the capture input stays as the fallback (opens the native camera app on phones)
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
         cameraInput.click();
         return;
@@ -142,17 +147,9 @@ captureBtn.addEventListener("click", () => {
     const width = cameraStream.videoWidth;
     const height = cameraStream.videoHeight;
     if (!width) return; // stream not ready yet
-    const scale = Math.min(1, MAX_DIMENSION / Math.max(width, height));
-    const canvas = document.createElement("canvas");
-    canvas.width = Math.round(width * scale);
-    canvas.height = Math.round(height * scale);
-    canvas.getContext("2d").drawImage(cameraStream, 0, 0, canvas.width, canvas.height);
+    const blobPromise = toJpegBlob(cameraStream, width, height); // draws the frame before the stream stops
     stopCamera();
-    canvas.toBlob(
-        (blob) => (blob ? usePhoto(blob, "camera photo") : showError("Couldn't capture the photo.")),
-        "image/jpeg",
-        0.85
-    );
+    blobPromise.then((blob) => usePhoto(blob, "camera photo"), (err) => showError(err.message));
 });
 
 cancelCameraBtn.addEventListener("click", stopCamera);
@@ -191,9 +188,9 @@ function renderResults(data) {
         summaryEl.hidden = false;
     }
     for (const item of data.items) {
-        const info = BIN_INFO[item.bin];
+        const label = BIN_LABELS[item.bin];
         const card = document.createElement("article");
-        card.className = "item-card" + (info ? " " + item.bin : "");
+        card.className = "item-card" + (label ? " " + item.bin : "");
 
         const header = document.createElement("div");
         header.className = "item-header";
@@ -201,7 +198,7 @@ function renderResults(data) {
         name.textContent = item.name;
         const badge = document.createElement("span");
         badge.className = "bin-badge";
-        badge.textContent = info ? info.label : item.bin;
+        badge.textContent = label || item.bin;
         header.append(name, badge);
         card.append(header);
 
