@@ -10,9 +10,6 @@ from pydantic import BaseModel
 
 load_dotenv()
 API_KEY = os.environ.get("GEMINI_API_KEY")
-# a missing key must not crash the import — serverless hosts (Vercel) import this
-# module directly, so /classify reports the problem instead; running locally via
-# `python app.py` still fails fast at the bottom of this file
 client = genai.Client(api_key=API_KEY) if API_KEY else None
 
 app = Flask(__name__)

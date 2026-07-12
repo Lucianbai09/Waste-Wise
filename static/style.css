@@ -17,7 +17,7 @@ body {
     background-size: 2.35vw 2.35vw;
 }
 
-/* ---------------- Home / landing page (matches homeOG.png) ---------------- */
+/* Home / landing page */
 
 .hero {
     display: flex;
@@ -96,9 +96,7 @@ body {
     transform: translate(-50%, -50%);
 }
 
-/* Each item orbits the earth's center at radius --r (fraction of the scene),
-   starting at angle --a (deg); the trailing counter-rotation keeps the item
-   itself from spinning. Negative delay offsets each item to its start angle. */
+/* Each item orbits the earth's center at radius */
 .orbit-item {
     --T: 80s;
     width: var(--s);
@@ -123,7 +121,7 @@ body {
     }
 }
 
-/* Title Case for all button/label text, including JS-set hint states */
+/* Title Case for all button/label text */
 .hero-btn,
 .pill-btn,
 .cancel-sort-btn,
@@ -133,7 +131,7 @@ body {
     text-transform: capitalize;
 }
 
-/* ---------------- Sort page (matches sortpageOG.png / sortpage.png) ---------------- */
+/* Sort page */
 
 .sort-page {
     display: flex;
@@ -437,7 +435,7 @@ body {
     to { transform: rotate(360deg); }
 }
 
-/* ---------------- small screens ---------------- */
+/* smaller screens */
 
 @media (max-width: 820px) {
     body {
